@@ -11,20 +11,21 @@ namespace MyApp
             while (true)
             {
                 Console.WriteLine("Введите количество чисел в массиве");
-                int[] arr = new int[ReadSize()]; // добавить проверку нулевого и отрицательного ввода
-                Console.WriteLine("DIBAG " + arr.Length);
+                int[] arr = new int[ReadSize()];
+                Console.WriteLine("Поочерёдно введите элементы массива");
                 for (int i = 0; i < arr.Length; i++)
                 {
                     arr[i] = ReadNumber();
                 }
 
-                Console.Write("DIBAG ");
+                Console.Write("Введёный массив: ");
                 for (int i = 0; i < arr.Length; i++)
                 {
                     Console.Write(arr[i] + " ");
                 }
                 Console.WriteLine();
-                Console.WriteLine("finally, " + FindAnswer(arr));
+                Console.WriteLine("Ответ: " + FindAnswer(arr));
+                Console.WriteLine();
             }
         }
 
@@ -39,6 +40,7 @@ namespace MyApp
             }
             catch (Exception ex)
             { 
+                Console.WriteLine("Элемент массива должен быть целым числом");
                 Console.WriteLine(ex.Message);
                 number = ReadNumber();
             }
@@ -62,8 +64,8 @@ namespace MyApp
                     secondHighestValue = arr[i];
                 }
             }
-            if (secondHighestValue == highestValue)
-                Console.Write("Все числа в массиве - это " + highestValue);
+            if ((secondHighestValue == highestValue) | (arr.Length == 1))
+                Console.WriteLine("Все числа в массиве - это " + highestValue);
             if (secondHighestValue == int.MinValue)
             {
                 return highestValue;
@@ -79,14 +81,14 @@ namespace MyApp
                 size = int.Parse(s);
                 if (size <= 0)
                 {
-                    //Console.WriteLine("Введите натуральное число");
-                    //ReadSize();
-                    int.Parse("k");
+                    Console.WriteLine("Введите натуральное число");
+                    size = ReadSize();
                 }
             }
             catch(Exception ex)
             {
                 Console.WriteLine("Введите натуральное число");
+                Console.WriteLine(ex.Message);
                 size = ReadSize();
             }
             return size;
